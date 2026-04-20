@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Maryam & Daniyal — Nikkah Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;
+  --gold-light:#E8D5A3;
+  --gold-dark:#A67C2E;
+  --cream:#FDF8F0;
+  --cream-dark:#F5EDE0;
+  --emerald:#1B5E3B;
+  --emerald-light:#2E7D52;
+  --emerald-dark:#0D3B23;
+  --text-dark:#2C2417;
+  --text-muted:#6B5D4D;
+  --text-light:#9B8E7E;
+}
+html,body{
+  width:100%;height:100%;
+  background:#0a0a0a;
+  font-family:'Cormorant Garamond',serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─── WRAPPER ─── */
+.app{
+  width:100%;max-width:430px;margin:0 auto;
+  position:relative;overflow:hidden;
+  background:var(--cream);
+  min-height:100vh;
+}
+
+/* ═══════════════════════════════════════════
+   ENVELOPE OPENER — Full-screen
+   ═══════════════════════════════════════════ */
+.envelope-screen{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:1000;cursor:pointer;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.envelope-screen.opened{
+  pointer-events:none;
+}
+
+/* ── Top half: the flap that opens upward ── */
+.env-top{
+  position:absolute;top:0;left:0;width:100%;height:50%;
+  z-index:3;overflow:hidden;
+  transition:transform 1s cubic-bezier(0.4,0,0.2,1);
+  transform-origin:top center;
+}
+.env-top-face{
+  width:100%;height:100%;
+  background:linear-gradient(180deg,#EDE4D4 0%,#E6DCCB 40%,#DDD3C0 100%);
+  position:relative;
+}
+/* Subtle texture on flap */
+.env-top-face::after{
+  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&q=80');
+  background-size:cover;background-position:center;
+  opacity:0.04;
+}
+/* Triangular fold line at bottom of flap */
+.env-top-fold{
+  position:absolute;bottom:0;left:0;width:100%;height:0;
+  border-left:50vw solid transparent;
+  border-right:50vw solid transparent;
+  border-bottom:60px solid rgba(0,0,0,0.03);
+}
+
+/* ── Bottom half: slides down ── */
+.env-bottom{
+  position:absolute;bottom:0;left:0;width:100%;height:50%;
+  z-index:2;overflow:hidden;
+  transition:transform 1s cubic-bezier(0.4,0,0.2,1) 0.15s;
+}
+.env-bottom-face{
+  width:100%;height:100%;
+  background:linear-gradient(0deg,#E0D7C6 0%,#E6DCCB 60%,#EBE2D2 100%);
+  position:relative;
+}
+.env-bottom-face::after{
+  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&q=80');
+  background-size:cover;background-position:center bottom;
+  opacity:0.04;
+}
+/* Triangular fold at top of bottom half */
+.env-bottom-fold{
+  position:absolute;top:0;left:0;width:100%;height:0;
+  border-left:50vw solid transparent;
+  border-right:50vw solid transparent;
+  border-top:60px solid rgba(0,0,0,0.03);
+}
+
+/* ── Wax seal centered on seam ── */
+.wax-seal{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:72px;height:72px;
+  background:radial-gradient(circle at 38% 38%,#F0D88A,var(--gold),var(--gold-dark),#8B6914);
+  border-radius:50%;z-index:10;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.2),
+    0 1px 4px rgba(0,0,0,0.15),
+    inset 0 2px 4px rgba(255,255,255,0.25),
+    inset 0 -3px 6px rgba(0,0,0,0.15);
+  transition:transform 0.5s ease 0.1s,opacity 0.4s ease 0.2s;
+}
+/* Seal emboss ring */
+.wax-seal::before{
+  content:'';position:absolute;
+  width:58px;height:58px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.2);
+}
+.wax-seal-text{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;
+  color:rgba(255,255,255,0.9);
+  text-shadow:0 1px 3px rgba(0,0,0,0.25);
+  letter-spacing:1px;
+}
+
+/* ── Card behind envelope (peeking from center) ── */
+.env-card{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:80%;max-width:320px;
+  background:#fff;border-radius:6px;z-index:1;
+  padding:50px 30px;text-align:center;
+  box-shadow:0 4px 30px rgba(0,0,0,0.06);
+  opacity:0;
+  transition:opacity 0.6s ease 0.5s;
+}
+.env-card-exclusive{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;color:var(--text-light);
+  font-style:italic;letter-spacing:1.5px;
+  line-height:1.6;
+}
+.env-card-names{
+  font-family:'Playfair Display',serif;
+  font-size:24px;color:var(--text-dark);
+  margin-top:12px;font-weight:400;
+}
+.env-card-ornament{
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;margin-top:14px;
+}
+.env-card-ornament span{
+  width:30px;height:1px;background:var(--gold);opacity:0.4;
+}
+.env-card-ornament i{
+  width:5px;height:5px;border:1px solid var(--gold);
+  transform:rotate(45deg);background:var(--gold);
+}
+
+/* ── "Tap to open" label ── */
+.env-label{
+  position:absolute;bottom:12%;left:0;width:100%;
+  text-align:center;z-index:11;
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;letter-spacing:4px;
+  text-transform:uppercase;color:var(--text-light);
+  animation:pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:0.8}}
+
+/* ── Opening animation states ── */
+.envelope-screen.opening .env-top{
+  transform:translateY(-100%);
+}
+.envelope-screen.opening .env-bottom{
+  transform:translateY(100%);
+}
+.envelope-screen.opening .wax-seal{
+  transform:translate(-50%,-50%) scale(0);opacity:0;
+}
+.envelope-screen.opening .env-card{
+  opacity:1;
+}
+.envelope-screen.opening .env-label{
+  opacity:0;transition:opacity 0.3s ease;
+}
+/* After fully opened, hide everything */
+.envelope-screen.opened .env-top,
+.envelope-screen.opened .env-bottom,
+.envelope-screen.opened .wax-seal,
+.envelope-screen.opened .env-card,
+.envelope-screen.opened .env-label{
+  visibility:hidden;
+}
+.envelope-screen.opened{
+  background:transparent;
+  transition:opacity 0.6s ease 0.3s;
+  opacity:0;
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLABLE CONTENT
+   ═══════════════════════════════════════════ */
+.scroll-content{
+  display:none;width:100%;max-width:430px;margin:0 auto;
+  overflow-x:hidden;
+}
+.scroll-content.visible{display:block}
+
+.section{
+  width:100%;padding:80px 35px;
+  display:flex;flex-direction:column;
+  align-items:center;text-align:center;
+  position:relative;overflow:hidden;
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),
+             transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-scale{
+  opacity:0;transform:scale(0.9);
+  transition:opacity 0.9s ease,transform 0.9s ease;
+}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+.reveal-fade{opacity:0;transition:opacity 1s ease}
+.reveal-fade.visible{opacity:1}
+
+/* ─── ORNAMENT ─── */
+.ornament{
+  display:flex;align-items:center;gap:10px;
+  margin:22px 0;width:100%;justify-content:center;
+}
+.orn-line{height:1px;width:50px;background:var(--gold);opacity:0.4}
+.orn-dot{
+  width:6px;height:6px;border:1px solid var(--gold);
+  transform:rotate(45deg);flex-shrink:0;
+}
+.orn-dot.f{background:var(--gold)}
+.dark-orn .orn-line{background:var(--gold-light);opacity:0.4}
+.dark-orn .orn-dot{border-color:var(--gold-light)}
+.dark-orn .orn-dot.f{background:var(--gold-light)}
+
+/* ─── PARTICLES ─── */
+.particles-bg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;overflow:hidden;
+}
+.p-dot{
+  position:absolute;width:3px;height:3px;
+  background:var(--gold);border-radius:50%;
+  opacity:0;animation:pFloat 7s infinite ease-in;
+}
+.dark-section .p-dot{background:var(--gold-light)}
+@keyframes pFloat{
+  0%{opacity:0;transform:translateY(0)}
+  15%{opacity:0.5}85%{opacity:0.15}
+  100%{opacity:0;transform:translateY(-400px)}
+}
+
+/* ═══════════════════════════════════════════
+   HERO SECTION — Full-screen with image
+   ═══════════════════════════════════════════ */
+.hero-section{
+  min-height:100vh;position:relative;
+  justify-content:center;padding:60px 35px;
+  background:var(--cream);
+}
+.hero-bg-image{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80');
+  background-size:cover;background-position:center;
+  opacity:0.06;
+}
+.hero-floral-top{
+  position:absolute;top:0;left:0;width:100%;height:220px;
+  background-image:url('https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800&q=80');
+  background-size:cover;background-position:bottom;
+  opacity:0.1;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,0.6) 0%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0.6) 0%,transparent 100%);
+}
+.hero-floral-bottom{
+  position:absolute;bottom:0;left:0;width:100%;height:180px;
+  background-image:url('https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800&q=80');
+  background-size:cover;background-position:top;
+  opacity:0.1;transform:rotate(180deg);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,0.5) 0%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0.5) 0%,transparent 100%);
+}
+.bismillah{
+  font-family:'Amiri',serif;font-size:32px;
+  color:var(--gold-dark);line-height:1.7;direction:rtl;
+  position:relative;z-index:1;
+}
+.bismillah-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;color:var(--text-light);
+  letter-spacing:3px;text-transform:uppercase;margin-top:6px;
+  position:relative;z-index:1;
+}
+.hero-names{margin-top:50px;position:relative;z-index:1}
+.hero-bride,.hero-groom{
+  font-family:'Playfair Display',serif;
+  font-size:54px;font-weight:400;
+  color:var(--text-dark);line-height:1.1;
+}
+.hero-amp{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-size:32px;
+  color:var(--gold);margin:8px 0;
+}
+.hero-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;color:var(--text-light);
+  letter-spacing:4px;text-transform:uppercase;margin-top:20px;
+  position:relative;z-index:1;
+}
+.hero-date-small{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;color:var(--text-muted);
+  letter-spacing:2px;margin-top:8px;
+  position:relative;z-index:1;
+}
+.scroll-hint{
+  position:absolute;bottom:30px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:1;
+}
+.scroll-hint-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--text-light);
+}
+.scroll-arrow{
+  width:20px;height:20px;
+  border-right:1.5px solid var(--gold);
+  border-bottom:1.5px solid var(--gold);
+  transform:rotate(45deg);
+  animation:bounceDown 2s infinite;opacity:0.5;
+}
+@keyframes bounceDown{
+  0%,100%{transform:rotate(45deg) translate(0,0);opacity:0.3}
+  50%{transform:rotate(45deg) translate(4px,4px);opacity:0.7}
+}
+.shimmer{
+  background:linear-gradient(105deg,var(--text-dark) 0%,var(--text-dark) 40%,var(--gold) 50%,var(--text-dark) 60%,var(--text-dark) 100%);
+  background-size:200% 100%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;animation:shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer{
+  0%,100%{background-position:200% center}
+  50%{background-position:-200% center}
+}
+
+/* ═══════════════════════════════════════════
+   QURAN VERSE IMAGE SECTION
+   ═══════════════════════════════════════════ */
+.verse-image-section{
+  padding:0;height:250px;position:relative;
+}
+.verse-image-bg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80');
+  background-size:cover;background-position:center;
+}
+.verse-image-overlay{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(180deg,rgba(13,59,35,0.85) 0%,rgba(27,94,59,0.9) 100%);
+}
+.verse-image-content{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  height:100%;padding:30px;
+}
+.verse-arabic{
+  font-family:'Amiri',serif;font-size:22px;
+  color:var(--gold-light);direction:rtl;line-height:1.8;
+}
+.verse-english{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:14px;
+  color:var(--gold-light);opacity:0.7;
+  margin-top:12px;line-height:1.6;max-width:300px;
+}
+.verse-ref{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;color:var(--gold-light);
+  opacity:0.4;letter-spacing:2px;margin-top:8px;
+}
+
+/* ═══════════════════════════════════════════
+   COUNTDOWN
+   ═══════════════════════════════════════════ */
+.countdown-section{
+  background:linear-gradient(180deg,var(--emerald-dark) 0%,var(--emerald) 100%);
+  padding:70px 30px;position:relative;
+}
+.countdown-bg-img{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=800&q=80');
+  background-size:cover;background-position:center;
+  opacity:0.08;mix-blend-mode:overlay;
+}
+.countdown-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--gold-light);opacity:0.7;
+  position:relative;z-index:1;
+}
+.countdown-title{
+  font-family:'Playfair Display',serif;
+  font-size:30px;font-weight:400;
+  color:var(--gold-light);margin:10px 0 5px;
+  position:relative;z-index:1;
+}
+.countdown-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;color:var(--gold-light);opacity:0.6;
+  letter-spacing:1px;margin-bottom:35px;
+  position:relative;z-index:1;
+}
+.countdown-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:16px;width:100%;max-width:300px;
+  position:relative;z-index:1;
+}
+.countdown-box{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(232,213,163,0.15);
+  border-radius:8px;padding:20px 10px;
+  backdrop-filter:blur(10px);
+}
+.countdown-num{
+  font-family:'Playfair Display',serif;
+  font-size:44px;font-weight:700;
+  color:var(--gold-light);line-height:1;
+}
+.countdown-unit{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold-light);opacity:0.5;margin-top:6px;
+}
+
+/* ═══════════════════════════════════════════
+   EVENT DETAILS
+   ═══════════════════════════════════════════ */
+.details-section{background:var(--cream);padding:80px 35px}
+.details-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--gold-dark);opacity:0.7;
+}
+.details-title{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:400;
+  color:var(--text-dark);margin:10px 0 5px;
+}
+.details-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;color:var(--text-light);
+  letter-spacing:1px;margin-bottom:40px;
+}
+/* Calendar */
+.calendar{
+  width:100%;max-width:300px;
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:12px;overflow:hidden;background:#fff;
+  box-shadow:0 4px 20px rgba(0,0,0,0.04);
+}
+.cal-header{background:var(--emerald);padding:14px;text-align:center}
+.cal-month{
+  font-family:'Playfair Display',serif;
+  font-size:18px;color:var(--gold-light);font-weight:400;
+}
+.cal-year{
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;color:var(--gold-light);opacity:0.6;letter-spacing:3px;
+}
+.cal-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:2px;padding:12px 10px;
+}
+.cal-day-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:10px;color:var(--text-light);
+  text-align:center;padding:4px 0;
+  letter-spacing:1px;text-transform:uppercase;
+}
+.cal-day{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;color:var(--text-muted);
+  text-align:center;padding:8px 4px;border-radius:50%;
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+}
+.cal-day.empty{color:transparent}
+.cal-day.highlight{
+  background:var(--emerald);color:#fff;font-weight:600;
+  box-shadow:0 2px 10px rgba(27,94,59,0.3);
+  animation:calPulse 2s ease-in-out infinite;
+}
+@keyframes calPulse{
+  0%,100%{box-shadow:0 2px 10px rgba(27,94,59,0.3)}
+  50%{box-shadow:0 2px 20px rgba(27,94,59,0.5)}
+}
+.cal-day.today{border:1px solid var(--gold);color:var(--gold-dark)}
+.detail-cards{
+  margin-top:35px;width:100%;max-width:300px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.detail-card{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 20px;background:#fff;border-radius:10px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+  border:1px solid rgba(201,168,76,0.1);
+}
+.detail-card-icon{
+  width:40px;height:40px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(27,94,59,0.08);border-radius:50%;
+}
+.detail-card-icon svg{width:20px;height:20px}
+.detail-card-info{text-align:left}
+.detail-card-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--text-light);
+}
+.detail-card-value{
+  font-family:'Playfair Display',serif;
+  font-size:17px;color:var(--text-dark);
+  font-weight:400;margin-top:2px;
+}
+
+/* ═══════════════════════════════════════════
+   VENUE PHOTO SECTION
+   ═══════════════════════════════════════════ */
+.venue-photo-section{
+  padding:0;position:relative;height:300px;
+}
+.venue-photo-bg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80');
+  background-size:cover;background-position:center;
+}
+.venue-photo-overlay{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(180deg,
+    rgba(253,248,240,1) 0%,
+    rgba(253,248,240,0) 15%,
+    rgba(253,248,240,0) 85%,
+    rgba(253,248,240,1) 100%
+  );
+}
+.venue-photo-text{
+  position:absolute;bottom:40px;left:0;width:100%;
+  text-align:center;z-index:1;
+}
+.venue-photo-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;letter-spacing:4px;
+  text-transform:uppercase;color:var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════
+   VENUE + MAP
+   ═══════════════════════════════════════════ */
+.venue-section{
+  background:var(--cream);padding:60px 35px 80px;
+}
+.venue-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--gold-dark);opacity:0.7;
+}
+.venue-title{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:600;
+  color:var(--text-dark);margin:10px 0;line-height:1.3;
+}
+.venue-address{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;color:var(--text-muted);line-height:1.6;
+}
+.map-container{
+  width:100%;max-width:340px;margin-top:30px;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  border:1px solid rgba(201,168,76,0.15);position:relative;
+}
+.map-placeholder{
+  width:100%;height:200px;position:relative;overflow:hidden;
+}
+.map-real-image{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80');
+  background-size:cover;background-position:center;
+  filter:saturate(0.3) brightness(1.1);
+}
+.map-tint{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:rgba(253,248,240,0.3);
+}
+.map-pin{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-70%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+}
+.map-pin-icon{
+  width:36px;height:36px;
+  background:var(--emerald);border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(27,94,59,0.3);
+  animation:pinBounce 2s ease-in-out infinite;
+}
+.map-pin-icon::after{
+  content:'';width:12px;height:12px;
+  background:#fff;border-radius:50%;transform:rotate(45deg);
+}
+@keyframes pinBounce{
+  0%,100%{transform:rotate(-45deg) translateY(0)}
+  50%{transform:rotate(-45deg) translateY(-6px)}
+}
+.map-pin-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;color:var(--text-dark);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-top:10px;background:rgba(255,255,255,0.9);
+  padding:4px 12px;border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  white-space:nowrap;
+}
+.map-pin-pulse{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(27,94,59,0.15);
+  animation:mapPulse 2s ease-in-out infinite;
+}
+@keyframes mapPulse{
+  0%{transform:translate(-50%,-50%) scale(0.5);opacity:1}
+  100%{transform:translate(-50%,-50%) scale(1.5);opacity:0}
+}
+.map-footer{
+  padding:16px 20px;background:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.map-footer-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;color:var(--text-muted);letter-spacing:1px;
+}
+.map-btn{
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--emerald);background:rgba(27,94,59,0.08);
+  border:1px solid rgba(27,94,59,0.2);
+  padding:8px 16px;border-radius:20px;
+  cursor:pointer;text-decoration:none;transition:all 0.3s ease;
+}
+.map-btn:hover{background:var(--emerald);color:#fff}
+
+/* ═══════════════════════════════════════════
+   RSVP
+   ═══════════════════════════════════════════ */
+.rsvp-section{
+  background:linear-gradient(180deg,var(--emerald) 0%,var(--emerald-dark) 100%);
+  padding:80px 35px;position:relative;
+}
+.rsvp-bg-img{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=800&q=80');
+  background-size:cover;background-position:center;
+  opacity:0.07;mix-blend-mode:overlay;
+}
+.rsvp-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--gold-light);opacity:0.6;
+  position:relative;z-index:1;
+}
+.rsvp-title{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:400;
+  color:var(--gold-light);margin:10px 0 5px;
+  position:relative;z-index:1;
+}
+.rsvp-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;color:var(--gold-light);
+  opacity:0.75;line-height:1.9;max-width:280px;
+  position:relative;z-index:1;
+}
+.rsvp-inshallah{
+  font-family:'Amiri',serif;font-size:24px;
+  color:var(--gold-light);direction:rtl;margin-top:5px;
+  position:relative;z-index:1;
+}
+.rsvp-inshallah-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;color:var(--gold-light);
+  opacity:0.5;letter-spacing:3px;text-transform:uppercase;margin-top:4px;
+  position:relative;z-index:1;
+}
+
+/* ═══════════════════════════════════════════
+   CLOSING
+   ═══════════════════════════════════════════ */
+.closing-section{
+  background:var(--cream);padding:80px 35px 100px;position:relative;
+}
+.closing-bg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:url('https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&q=80');
+  background-size:cover;background-position:center;
+  opacity:0.05;
+}
+.closing-dua{
+  font-family:'Amiri',serif;font-size:26px;
+  color:var(--gold-dark);direction:rtl;line-height:1.9;
+  position:relative;z-index:1;
+}
+.closing-translation{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:15px;
+  color:var(--text-muted);line-height:1.8;
+  max-width:280px;margin-top:5px;
+  position:relative;z-index:1;
+}
+.closing-ref{
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;color:var(--text-light);
+  letter-spacing:2px;margin-top:6px;
+  position:relative;z-index:1;
+}
+.closing-names{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:400;
+  color:var(--text-dark);margin-top:10px;
+  position:relative;z-index:1;
+}
+.closing-date{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;color:var(--text-muted);
+  letter-spacing:3px;margin-top:6px;
+  position:relative;z-index:1;
+}
+.closing-footer{
+  margin-top:50px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;color:var(--text-light);
+  letter-spacing:2px;opacity:0.5;
+  position:relative;z-index:1;
+}
+
+/* ─── DARK SECTION ─── */
+.dark-section{color:var(--gold-light)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-height:700px){
+  .hero-bride,.hero-groom{font-size:44px}
+  .bismillah{font-size:26px}
+  .countdown-num{font-size:36px}
+}
+@media(min-width:431px){
+  .app{border-left:1px solid #222;border-right:1px solid #222}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ ENVELOPE OPENER — Full Screen ═══════ -->
+<div class="envelope-screen" id="envelopeScreen">
+  <!-- Top half (flap) -->
+  <div class="env-top">
+    <div class="env-top-face">
+      <div class="env-top-fold"></div>
+    </div>
+  </div>
+  <!-- Bottom half -->
+  <div class="env-bottom">
+    <div class="env-bottom-face">
+      <div class="env-bottom-fold"></div>
+    </div>
+  </div>
+  <!-- Wax seal on seam -->
+  <div class="wax-seal">
+    <span class="wax-seal-text">M&D</span>
+  </div>
+  <!-- Card revealed behind -->
+  <div class="env-card">
+    <div class="env-card-exclusive">this invitation is<br>exclusively for you</div>
+    <div class="env-card-names">Maryam & Daniyal</div>
+    <div class="env-card-ornament">
+      <span></span><i></i><span></span>
+    </div>
+  </div>
+  <!-- Tap label -->
+  <div class="env-label">Tap to open</div>
+</div>
+
+<!-- ═══════ MAIN CONTENT ═══════ -->
+<div class="app">
+<div class="scroll-content" id="scrollContent">
+
+  <!-- HERO -->
+  <section class="section hero-section">
+    <div class="hero-bg-image"></div>
+    <div class="hero-floral-top"></div>
+    <div class="hero-floral-bottom"></div>
+    <div class="particles-bg" id="heroParticles"></div>
+
+    <div class="reveal" data-delay="200">
+      <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="bismillah-en">In the name of Allah, the Most Gracious, the Most Merciful</div>
+    </div>
+
+    <div class="ornament reveal-fade" data-delay="500">
+      <span class="orn-line"></span><span class="orn-dot f"></span><span class="orn-line"></span>
+    </div>
+
+    <div class="hero-names">
+      <div class="reveal" data-delay="600">
+        <div class="hero-bride shimmer">Maryam</div>
+      </div>
+      <div class="reveal-scale" data-delay="900">
+        <div class="hero-amp">&</div>
+      </div>
+      <div class="reveal" data-delay="1100">
+        <div class="hero-groom shimmer">Daniyal</div>
+      </div>
+    </div>
+
+    <div class="ornament reveal-fade" data-delay="1400">
+      <span class="orn-line"></span><span class="orn-dot"></span><span class="orn-dot f"></span><span class="orn-dot"></span><span class="orn-line"></span>
+    </div>
+
+    <div class="reveal" data-delay="1600">
+      <div class="hero-subtitle">Nikkah Ceremony</div>
+      <div class="hero-date-small">Thursday, 5th June 2025 &middot; 5:00 PM</div>
+    </div>
+
+    <div class="scroll-hint reveal-fade" data-delay="2200">
+      <span class="scroll-hint-text">Scroll down</span>
+      <span class="scroll-arrow"></span>
+    </div>
+  </section>
+
+  <!-- QURAN VERSE WITH IMAGE -->
+  <section class="section verse-image-section">
+    <div class="verse-image-bg"></div>
+    <div class="verse-image-overlay"></div>
+    <div class="verse-image-content">
+      <div class="reveal">
+        <div class="verse-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا</div>
+      </div>
+      <div class="reveal" data-delay="300">
+        <div class="verse-english">"And among His signs is that He created for you mates from among yourselves, that you may dwell in tranquility with them"</div>
+        <div class="verse-ref">Surah Ar-Rum 30:21</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="section countdown-section dark-section">
+    <div class="countdown-bg-img"></div>
+    <div class="particles-bg" id="countdownParticles"></div>
+
+    <div class="reveal">
+      <div class="countdown-label">Counting down to</div>
+      <div class="countdown-title">The Big Day</div>
+      <div class="countdown-sub">For the most special day of our lives</div>
+    </div>
+
+    <div class="countdown-grid reveal-scale" data-delay="200">
+      <div class="countdown-box">
+        <div class="countdown-num" id="cd-days">--</div>
+        <div class="countdown-unit">Days</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-num" id="cd-hours">--</div>
+        <div class="countdown-unit">Hours</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-num" id="cd-mins">--</div>
+        <div class="countdown-unit">Minutes</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-num" id="cd-secs">--</div>
+        <div class="countdown-unit">Seconds</div>
+      </div>
+    </div>
+
+    <div class="ornament dark-orn reveal-fade" data-delay="400" style="margin-top:35px">
+      <span class="orn-line"></span><span class="orn-dot f"></span><span class="orn-line"></span>
+    </div>
+  </section>
+
+  <!-- EVENT DETAILS + CALENDAR -->
+  <section class="section details-section">
+    <div class="particles-bg" id="detailsParticles"></div>
+
+    <div class="reveal">
+      <div class="details-heading">Details of the Day</div>
+      <div class="details-title">Everything you need to know</div>
+      <div class="details-sub">We would be honoured by your presence</div>
+    </div>
+
+    <div class="calendar reveal-scale" data-delay="200">
+      <div class="cal-header">
+        <div class="cal-month">June</div>
+        <div class="cal-year">2025</div>
+      </div>
+      <div class="cal-grid" id="calendarGrid"></div>
+    </div>
+
+    <div class="detail-cards">
+      <div class="detail-card reveal" data-delay="400">
+        <div class="detail-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="detail-card-info">
+          <div class="detail-card-label">Date</div>
+          <div class="detail-card-value">Thursday, 5th June 2025</div>
+        </div>
+      </div>
+      <div class="detail-card reveal" data-delay="550">
+        <div class="detail-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="detail-card-info">
+          <div class="detail-card-label">Time</div>
+          <div class="detail-card-value">5:00 PM</div>
+        </div>
+      </div>
+      <div class="detail-card reveal" data-delay="700">
+        <div class="detail-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <div class="detail-card-info">
+          <div class="detail-card-label">Venue</div>
+          <div class="detail-card-value">Executive Marquee</div>
+        </div>
+      </div>
+      <div class="detail-card reveal" data-delay="850">
+        <div class="detail-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div class="detail-card-info">
+          <div class="detail-card-label">Followed by</div>
+          <div class="detail-card-value">Dinner Reception</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE PHOTO -->
+  <section class="section venue-photo-section reveal-fade">
+    <div class="venue-photo-bg"></div>
+    <div class="venue-photo-overlay"></div>
+  </section>
+
+  <!-- VENUE + MAP -->
+  <section class="section venue-section">
+    <div class="particles-bg" id="venueParticles"></div>
+
+    <div class="reveal">
+      <div class="venue-heading">Location</div>
+      <div class="venue-title">Executive Marquee</div>
+    </div>
+
+    <div class="ornament reveal-fade" data-delay="200">
+      <span class="orn-line"></span><span class="orn-dot f"></span><span class="orn-line"></span>
+    </div>
+
+    <div class="reveal" data-delay="300">
+      <div class="venue-address">
+        We look forward to welcoming you<br>
+        at the venue on the evening of<br>
+        Thursday, 5th June 2025
+      </div>
+    </div>
+
+    <div class="map-container reveal-scale" data-delay="500">
+      <div class="map-placeholder">
+        <div class="map-real-image"></div>
+        <div class="map-tint"></div>
+        <div class="map-pin-pulse"></div>
+        <div class="map-pin">
+          <div class="map-pin-icon"></div>
+          <div class="map-pin-label">Executive Marquee</div>
+        </div>
+      </div>
+      <div class="map-footer">
+        <div class="map-footer-text">Get directions</div>
+        <a class="map-btn" href="#" target="_blank">Open Map</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section rsvp-section dark-section">
+    <div class="rsvp-bg-img"></div>
+    <div class="particles-bg" id="rsvpParticles"></div>
+
+    <div class="reveal">
+      <div class="rsvp-label">Your Presence</div>
+      <div class="rsvp-title">RSVP</div>
+    </div>
+    <div class="ornament dark-orn reveal-fade" data-delay="200">
+      <span class="orn-line"></span><span class="orn-dot f"></span><span class="orn-line"></span>
+    </div>
+    <div class="reveal" data-delay="400">
+      <div class="rsvp-text">
+        Kindly grace us with your<br>
+        presence and prayers.<br><br>
+        Your attendance would mean<br>
+        the world to us.
+      </div>
+    </div>
+    <div class="ornament dark-orn reveal-fade" data-delay="600">
+      <span class="orn-line"></span><span class="orn-dot"></span><span class="orn-dot f"></span><span class="orn-dot"></span><span class="orn-line"></span>
+    </div>
+    <div class="reveal" data-delay="800">
+      <div class="rsvp-inshallah">اِنْ شَاءَ اللّٰہ</div>
+      <div class="rsvp-inshallah-en">In Sha Allah</div>
+    </div>
+  </section>
+
+  <!-- CLOSING DUA -->
+  <section class="section closing-section">
+    <div class="closing-bg"></div>
+    <div class="particles-bg" id="closingParticles"></div>
+
+    <div class="reveal-scale">
+      <div class="closing-dua">رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا<br>وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ</div>
+    </div>
+    <div class="ornament reveal-fade" data-delay="300">
+      <span class="orn-line"></span><span class="orn-dot f"></span><span class="orn-line"></span>
+    </div>
+    <div class="reveal" data-delay="500">
+      <div class="closing-translation">"Our Lord, grant us from among our spouses and offspring comfort to our eyes"</div>
+      <div class="closing-ref">— Surah Al-Furqan 25:74</div>
+    </div>
+    <div class="ornament reveal-fade" data-delay="700">
+      <span class="orn-line"></span><span class="orn-dot"></span><span class="orn-dot f"></span><span class="orn-dot"></span><span class="orn-line"></span>
+    </div>
+    <div class="reveal" data-delay="900">
+      <div class="closing-names shimmer">Maryam & Daniyal</div>
+      <div class="closing-date">5 &middot; 06 &middot; 2025</div>
+    </div>
+    <div class="closing-footer reveal-fade" data-delay="1100">
+      With love and blessings
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ═══════ ENVELOPE ═══════
+  var envelopeScreen = document.getElementById('envelopeScreen');
+  var scrollContent = document.getElementById('scrollContent');
+  var opened = false;
+
+  envelopeScreen.addEventListener('click', function(){
+    if(opened) return;
+    opened = true;
+    envelopeScreen.classList.add('opening');
+    // After halves split and card shows, fade out & reveal content
+    setTimeout(function(){
+      envelopeScreen.classList.add('opened');
+      scrollContent.classList.add('visible');
+      document.body.style.overflow = 'auto';
+      triggerHeroAnimations();
+      startCountdown();
+    }, 2200);
+  });
+
+  document.body.style.overflow = 'hidden';
+
+  // ═══════ HERO ANIMATIONS ═══════
+  function triggerHeroAnimations(){
+    var hero = document.querySelector('.hero-section');
+    if(!hero) return;
+    var items = hero.querySelectorAll('.reveal,.reveal-scale,.reveal-fade');
+    items.forEach(function(el){
+      var delay = parseInt(el.getAttribute('data-delay')) || 0;
+      setTimeout(function(){ el.classList.add('visible'); }, delay);
+    });
+  }
+
+  // ═══════ SCROLL REVEAL ═══════
+  function onScroll(){
+    var items = document.querySelectorAll('.reveal:not(.visible),.reveal-scale:not(.visible),.reveal-fade:not(.visible)');
+    items.forEach(function(el){
+      if(el.closest('.hero-section')) return;
+      var rect = el.getBoundingClientRect();
+      if(rect.top < window.innerHeight * 0.88){
+        var delay = parseInt(el.getAttribute('data-delay')) || 0;
+        setTimeout(function(){ el.classList.add('visible'); }, delay);
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // ═══════ COUNTDOWN ═══════
+  var target = new Date('2025-06-05T17:00:00').getTime();
+  function startCountdown(){
+    function update(){
+      var now = Date.now();
+      var diff = Math.max(0, target - now);
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent = d < 10 ? '0'+d : d;
+      document.getElementById('cd-hours').textContent = h < 10 ? '0'+h : h;
+      document.getElementById('cd-mins').textContent = m < 10 ? '0'+m : m;
+      document.getElementById('cd-secs').textContent = s < 10 ? '0'+s : s;
+    }
+    update();
+    setInterval(update, 1000);
+  }
+
+  // ═══════ CALENDAR (June 2025) ═══════
+  (function(){
+    var grid = document.getElementById('calendarGrid');
+    ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(function(d){
+      var el = document.createElement('div');
+      el.className = 'cal-day-name'; el.textContent = d;
+      grid.appendChild(el);
+    });
+    // June 1, 2025 = Sunday
+    var totalDays = 30;
+    var today = new Date();
+    var todayDate = (today.getMonth()===5 && today.getFullYear()===2025) ? today.getDate() : -1;
+    for(var d=1;d<=totalDays;d++){
+      var cell = document.createElement('div');
+      cell.className = 'cal-day'; cell.textContent = d;
+      if(d === 5) cell.classList.add('highlight');
+      if(d === todayDate) cell.classList.add('today');
+      grid.appendChild(cell);
+    }
+  })();
+
+  // ═══════ PARTICLES ═══════
+  ['heroParticles','countdownParticles','detailsParticles','venueParticles','rsvpParticles','closingParticles'].forEach(function(id){
+    var c = document.getElementById(id);
+    if(!c) return;
+    for(var i=0;i<12;i++){
+      var p = document.createElement('div');
+      p.className = 'p-dot';
+      p.style.left = Math.random()*100+'%';
+      p.style.bottom = '-3%';
+      p.style.animationDelay = (Math.random()*7)+'s';
+      p.style.animationDuration = (5+Math.random()*5)+'s';
+      var sz = 2+Math.random()*3;
+      p.style.width = sz+'px'; p.style.height = sz+'px';
+      c.appendChild(p);
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
